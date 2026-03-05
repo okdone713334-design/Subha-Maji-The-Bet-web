@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question Platform | Subha Maji</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(145deg, #1B4D3E 0%, #2C5F4A 20%, #3D7156 40%, #4E8362 60%, #2C5F4A 80%, #1B4D3E 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', 'Arial Unicode MS', Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        /* অ্যানিমেটেড ব্যাকগ্রাউন্ড প্যাটার্ন */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" opacity="0.1"><circle cx="150" cy="150" r="40" stroke="%23FFD700" fill="none" stroke-width="2"/><path d="M80 100 L220 100 L220 200 L80 200 Z" stroke="%23FFD700" fill="none" stroke-width="2"/><text x="60" y="60" font-size="24" fill="%23FFD700" opacity="0.4">📚</text><text x="200" y="240" font-size="24" fill="%23FFD700" opacity="0.4">✏️</text><text x="220" y="80" font-size="20" fill="%23FFD700" opacity="0.4">❓</text></svg>');
+            background-repeat: repeat;
+            background-size: 280px 280px;
+            animation: floatingPattern 120s linear infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes floatingPattern {
+            from { background-position: 0 0; }
+            to { background-position: 500px 500px; }
+        }
+
+        /* দ্বিতীয় লেয়ার */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" opacity="0.08"><path d="M100 50 L100 150 M50 100 L150 100" stroke="%23FFD700" stroke-width="1"/><circle cx="100" cy="100" r="40" stroke="%23FFD700" fill="none" stroke-width="1.5"/><text x="85" y="110" font-size="20" fill="%23FFD700">⭐</text></svg>');
+            background-repeat: repeat;
+            background-size: 200px 200px;
+            animation: floatingStars 110s linear infinite reverse;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes floatingStars {
+            from { background-position: 0 0; }
+            to { background-position: 350px 300px; }
+        }
+
+        /* ফ্লোটিং এলিমেন্টস - পাখি, মেঘ, সূর্য, প্রদীপ, মানুষ */
+        .floating-element {
+            position: fixed;
+            font-size: 2.5rem;
+            z-index: 5;
+            pointer-events: none;
+            filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.5));
+        }
+
+        /* পাখি উড়ছে */
+        .bird-1 {
+            top: 15%;
+            left: -100px;
+            animation: flyBird1 25s linear infinite;
+        }
+        
+        .bird-2 {
+            top: 35%;
+            left: -100px;
+            animation: flyBird2 30s linear infinite 5s;
+        }
+        
+        .bird-3 {
+            top: 55%;
+            left: -100px;
+            animation: flyBird3 28s linear infinite 10s;
+        }
+
+        @keyframes flyBird1 {
+            0% { left: -100px; transform: translateY(0px) scale(0.8); }
+            25% { transform: translateY(-20px) scale(1); }
+            50% { transform: translateY(0px) scale(1.1); }
+            75% { transform: translateY(20px) scale(1); }
+            100% { left: 110vw; transform: translateY(0px) scale(0.8); }
+        }
+
+        @keyframes flyBird2 {
+            0% { left: -100px; transform: translateY(0px) scale(0.9); }
+            30% { transform: translateY(-15px) scale(1); }
+            60% { transform: translateY(15px) scale(1.1); }
+            100% { left: 110vw; transform: translateY(0px) scale(0.9); }
+        }
+
+        @keyframes flyBird3 {
+            0% { left: -100px; transform: translateY(0px) scale(0.7); }
+            20% { transform: translateY(-10px) scale(1); }
+            40% { transform: translateY(10px) scale(1); }
+            80% { transform: translateY(-10px) scale(0.9); }
+            100% { left: 110vw; transform: translateY(0px) scale(0.7); }
+        }
+
+        /* মেঘ ভাসছে */
+        .cloud-1 {
+            top: 10%;
+            right: -200px;
+            font-size: 4rem;
+            animation: floatCloud1 40s linear infinite;
+        }
+        
+        .cloud-2 {
+            top: 40%;
+            left: -200px;
+            font-size: 3.5rem;
+            animation: floatCloud2 35s linear infinite 8s;
+        }
+        
+        .cloud-3 {
+            top: 70%;
+            right: -200px;
+            font-size: 4.5rem;
+            animation: floatCloud3 45s linear infinite 15s;
+        }
+
+        @keyframes floatCloud1 {
+            from { right: -200px; }
+            to { right: 110vw; }
+        }
+
+        @keyframes floatCloud2 {
+            from { left: -200px; }
+            to { left: 110vw; }
+        }
+
+        @keyframes floatCloud3 {
+            from { right: -200px; }
+            to { right: 110vw; }
+        }
+
+        /* সূর্য - উপরে ডানদিকে */
+        .sun {
+            top: 20px;
+            right: 20px;
+            font-size: 4rem;
+            animation: rotateSun 20s linear infinite;
+            filter: drop-shadow(0 0 20px #FFD700);
+        }
+
+        @keyframes rotateSun {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* প্রদীপ - নিচে বামদিকে */
+        .lamp {
+            bottom: 30px;
+            left: 30px;
+            font-size: 3.5rem;
+            animation: flickerLamp 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 15px #FFA500);
+        }
+
+        @keyframes flickerLamp {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.1); filter: drop-shadow(0 0 25px #FFD700); }
+        }
+
+        /* মানুষ - নিচে ডানদিকে */
+        .person {
+            bottom: 30px;
+            right: 30px;
+            font-size: 4rem;
+            animation: wavePerson 4s ease-in-out infinite;
+        }
+
+        @keyframes wavePerson {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(15deg); }
+            75% { transform: rotate(-10deg); }
+        }
+
+        /* ওনার বার */
+        .owner-bar {
+            background: rgba(27, 77, 62, 0.3);
+            width: 100%;
+            text-align: center;
+            padding: 12px 0;
+            font-weight: bold;
+            color: #FFD700;
+            border-bottom: 2px solid rgba(255, 215, 0, 0.7);
+            letter-spacing: 2px;
+            font-size: 1.2rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .main-container {
+            max-width: 700px;
+            width: 100%;
+            background: transparent;
+            border: 3px solid #FFD700;
+            border-radius: 50px;
+            padding: 35px 25px;
+            margin: 25px 0;
+            position: relative;
+            z-index: 10;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .section-heading {
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 30px 0 20px 0;
+            color: #F0E68C;
+            text-align: left;
+            padding-left: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            border-left: 8px solid #FFD700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .button-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 30px;
+            padding-left: 20px;
+        }
+
+        .btn {
+            background: rgba(27, 77, 62, 0.8);
+            border: 2px solid #FFD700;
+            color: #F5DEB3;
+            padding: 18px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.3rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 8px 0 #8B6914, 0 15px 25px rgba(0, 0, 0, 0.6);
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            min-width: 180px;
+            flex: 0 1 auto;
+            text-decoration: none;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.4), transparent);
+            transition: 0.6s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:hover {
+            background: rgba(27, 77, 62, 0.95);
+            transform: translateY(-5px);
+            box-shadow: 0 12px 0 #8B6914, 0 20px 30px rgba(0, 0, 0, 0.7);
+            border-color: #FFD700;
+        }
+
+        .btn:active {
+            transform: translateY(5px);
+            box-shadow: 0 5px 0 #8B6914, 0 10px 20px rgba(0, 0, 0, 0.6);
+        }
+
+        .btn-icon {
+            font-size: 2rem;
+            filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.7));
+            transition: 0.3s;
+        }
+
+        .btn:hover .btn-icon {
+            transform: rotate(5deg) scale(1.1);
+        }
+
+        .footer-note {
+            color: #FFD700;
+            font-size: 1.1rem;
+            margin: 20px 0;
+            text-align: center;
+            background: rgba(27, 77, 62, 0.3);
+            padding: 10px 35px;
+            border-radius: 50px;
+            border: 2px solid rgba(255, 215, 0, 0.6);
+            position: relative;
+            z-index: 10;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        /* রেস্পন্সিভ ডিজাইন */
+        @media (max-width: 600px) {
+            .section-heading { font-size: 1.6rem; }
+            .btn { 
+                padding: 15px 25px; 
+                font-size: 1.1rem;
+                min-width: 150px;
+            }
+            .sun { font-size: 3rem; }
+            .lamp { font-size: 2.5rem; }
+            .person { font-size: 3rem; }
+            .cloud-1, .cloud-2, .cloud-3 { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ফ্লোটিং এলিমেন্টস - পাখি, মেঘ, সূর্য, প্রদীপ, মানুষ -->
+    <div class="floating-element bird-1">🕊️</div>
+    <div class="floating-element bird-2">🦅</div>
+    <div class="floating-element bird-3">🐦</div>
+    
+    <div class="floating-element cloud-1">☁️☁️</div>
+    <div class="floating-element cloud-2">☁️</div>
+    <div class="floating-element cloud-3">☁️☁️☁️</div>
+    
+    <div class="floating-element sun">☀️</div>
+    <div class="floating-element lamp">🪔</div>
+    <div class="floating-element person">🧑‍🏫</div>
+
+    <!-- ওনার বার -->
+    <div class="owner-bar">
+        Owner - Subha Maji
+    </div>
+
+    <div class="main-container">
+        <!-- MCQ TYPE QUESTIONS -->
+        <h2 class="section-heading">
+            <span>📝</span> MCQ TYPE QUESTIONS
+        </h2>
+        <div class="button-group">
+            <a href="SUBHA" class="btn" target="_blank">
+                <span class="btn-icon">🔴</span>
+                <span>PART ONE</span>
+            </a>
+            <a href="SUBHA" class="btn" target="_blank">
+                <span class="btn-icon">🔵</span>
+                <span>PART TWO</span>
+            </a>
+            <a href="SUBHA" class="btn" target="_blank">
+                <span class="btn-icon">🟡</span>
+                <span>PART THREE</span>
+            </a>
+            <a href="SUBHA" class="btn" target="_blank">
+                <span class="btn-icon">🟢</span>
+                <span>PART FOUR</span>
+            </a>
+        </div>
+
+        <!-- ASSERTION REASON TYPE QUESTIONS -->
+        <h2 class="section-heading">
+            <span>🧪</span> ASSERTION REASON TYPE QUESTIONS
+        </h2>
+        <div class="button-group">
+            <a href="SUBHA" class="btn" target="_blank">
+                <span class="btn-icon">📌</span>
+                <span>PART ONE</span>
+            </a>
+            <a href="SUBHA" class="btn" target="_blank">
+                <span class="btn-icon">📎</span>
+                <span>PART TWO</span>
+            </a>
+        </div>
+
+        <!-- MATCHING TYPE QUESTIONS -->
+        <h2 class="section-heading">
+            <span>🔗</span> MATCHING TYPE QUESTIONS
+        </h2>
+        <div class="button-group">
+            <a href="SUBHA" class="btn" target="_blank">
+                <span class="btn-icon">🧩</span>
+                <span>PART ONE</span>
+            </a>
+            <a href="SUBHA" class="btn" target="_blank">
+                <span class="btn-icon">🎯</span>
+                <span>PART TWO</span>
+            </a>
+        </div>
+
+        <!-- FILL IN THE BLANKS TYPE QUESTIONS -->
+        <h2 class="section-heading">
+            <span>✏️</span> FILL IN THE BLANKS TYPE QUESTIONS
+        </h2>
+        <div class="button-group">
+            <a href="SUBHA" class="btn" target="_blank">
+                <span class="btn-icon">📝</span>
+                <span>PART ONE</span>
+            </a>
+            <a href="SUBHA" class="btn" target="_blank">
+                <span class="btn-icon">📚</span>
+                <span>PART TWO</span>
+            </a>
+        </div>
+    </div>
+
+    <div class="footer-note">
+        ✨ Created with ❤️ by Subha Maji ✨
+    </div>
+</body>
+  </html>
